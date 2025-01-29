@@ -1,0 +1,42 @@
+3)Write an Express.js route handler for POST /register that accepts name, email, and password in the request body and returns a success message.
+Install Express: create a new directory for your project and run the following commands to set up a new Express application:
+mkdir express-app
+cd express-app
+npm init -y
+npm install express body-parser
+
+//Create the Express Server
+
+
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
+
+// POST /register route
+app.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+
+    // Basic validation
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+
+    // Here you would typically save the user to the database
+    // For this example, we'll just return a success message
+    res.status(201).json({ message: 'User  registered successfully', user: { name, email } });
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(Server is running on http://localhost:${PORT});
+});
+//Run the Server
+
+
+node server.js
