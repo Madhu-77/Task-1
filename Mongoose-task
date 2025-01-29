@@ -1,0 +1,36 @@
+4)Create a Mongoose schema and model for a Product with fields:
+title (String)
+price (Number)
+category (String)
+inStock (Boolean)
+
+
+npm install mongoose
+
+// Product.js
+const mongoose = require('mongoose');
+
+// Define the Product schema
+const productSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    inStock: {
+        type: Boolean,
+        default: true,
+    },
+});
+
+// Create the Product model
+const Product = mongoose.model('Product', productSchema);
+
+module.exports = Product;
