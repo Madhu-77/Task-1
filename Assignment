@@ -1,0 +1,73 @@
+3)  Install Express: create a new directory for your project and run the following commands to set up a new Express application:
+
+mkdir express-app
+cd express-app
+npm init -y
+npm install express body-parser
+Create the Express Server: Create a Express sever:
+// server.js
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const PORT = process.env.PORT || 3000;
+// Middleware to parse JSON bodies
+app.use(bodyParser.json());
+// POST /register route
+app.post('/register', (req, res) => {
+    const { name, email, password } = req.body;
+    // Basic validation
+    if (!name || !email || !password) {
+        return res.status(400).json({ message: 'All fields are required' });
+    }
+    // Here you would typically save the user to the database
+    // For this example, we'll just return a success message
+    res.status(201).json({ message: 'User  registered successfully', user: { name, email } });
+});
+// Start the server
+app.listen(PORT, () => {
+    console.log(Server is running on http://localhost:${PORT});
+});
+//Run the Server
+node server.js
+
+
+
+4)
+npm install mongoose
+// Product.js
+const mongoose = require('mongoose');
+// Define the Product schema
+const productSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+    },
+    price: {
+        type: Number,
+        required: true,
+    },
+    category: {
+        type: String,
+        required: true,
+    },
+    inStock: {
+        type: Boolean,
+        default: true,
+    },
+});
+// Create the Product model
+const Product = mongoose.model('Product', productSchema);
+module.exports = Product;
+
+
+
+5)
+// MongoDB query to find all Products in the "Electronics" category with a price greater than $500
+const query = db.products.find({
+    category: "Electronics",
+    price: { $gt: 500 }
+}).sort({ price: -1 });
+// Print the results (assuming you are using a MongoDB shell or similar environment)
+query.forEach(product => {
+    printjson(product);
+});
